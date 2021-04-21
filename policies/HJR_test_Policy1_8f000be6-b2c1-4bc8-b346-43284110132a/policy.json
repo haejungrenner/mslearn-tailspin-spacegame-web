@@ -1,0 +1,59 @@
+{
+ "properties": {
+  "displayName": "HJR_test_Policy1",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "_HJR",
+   "createdBy": "704701bf-b3ee-4acc-9756-2be359b5d67c",
+   "createdOn": "2021-04-21T13:30:46.8308656Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Compute/virtualmachines"
+     },
+     {
+      "field": "Microsoft.Compute/imagePublisher",
+      "equals": "MicrosoftWindowsServer"
+     },
+     {
+      "field": "Microsoft.Compute/imageOffer",
+      "equals": "WindowsServer"
+     },
+     {
+      "anyOf": [
+       {
+        "field": "name",
+        "contains": "."
+       },
+       {
+        "value": "[length(field('name'))]",
+        "lessOrEquals": 5
+       },
+       {
+        "value": "[length(field('name'))]",
+        "greater": 15
+       },
+       {
+        "field": "name",
+        "contains": "-"
+       }
+      ]
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/bb87a038-c70e-4ed6-8f03-f61d0e6c79d2/providers/Microsoft.Authorization/policyDefinitions/8f000be6-b2c1-4bc8-b346-43284110132a",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "8f000be6-b2c1-4bc8-b346-43284110132a"
+}
